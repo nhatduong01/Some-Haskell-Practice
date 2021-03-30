@@ -39,3 +39,46 @@ Count the number of elements in an array without using count, size or length ope
 The input and output portions will be handled automatically by the grader. 
 You only need to write a function with the recommended method signature.
 -}
+len :: [a] -> Int
+len [] = 0
+len lst = 1 + len (tail lst)
+{-
+Update the values of a list with their absolute values. 
+The input and output portions will be handled automatically during grading. 
+You only need to write a function with the recommended method signature.
+-}
+array_abs [] = []
+array_abs lst = [abs (head lst)] ++ array_abs (tail lst)
+{-
+The series expansion of e**x is given by:
+1 + x + x^2/2! + x^3/3!
+-}
+factorial :: Float -> Float
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+evaluate_e :: Float -> Float
+evaluate_e n = 1 + n + (n**2)/(factorial 2)  + (n**3)/(factorial 3) + (n**4)/(factorial 4) + 
+               (n**5)/(factorial 5) + (n**6)/(factorial 6) + (n**7)/(factorial 7) +(n**8)/(factorial 8) + (n**9)/(factorial 9)
+{-
+Area Under Curves and Volume of Revolving a Curve
+This relates to definite integration via numerical methods.
+Consider the algebraic expression given by:
+(a1)x^(b1) +(a2)x^(b2) + (a3)x^(b3) + ... + (an)x^(bn)
+1. Evaluate the area bounded by a given polynomial function of the kind described above, between the given limits of 
+    L and R
+2. Evaluate the volume of the solid obtained by revolving this polynomial curve around the x-axis
+-}
+-- This function should return a list [area, volume].
+equation_square_coefficent :: [Double] -> [Double]
+equation_square_coefficent  a  = [x*y| x <- a, y <- a]  
+equation_square_power :: [Double] -> [Double]
+equation_square_power a = [x + y | x <- a, y <- a]
+equation :: [Double] -> [Double] -> Double -> Double
+equation b c d =  sum [x*(d**y)  | (x,y) <- zip b c  ]
+list_of_values:: Double -> Double -> [Double]
+list_of_values a b = [a + 0.001*i | i <- [1..(b-a)/0.001] ]
+solve :: Double -> Double -> [Double] -> [Double] -> [Double]
+solve l r a b =  [sum [(equation a b value)*0.001 | value <- list_of_values l r ],
+                  pi *sum [(equation (equation_square_coefficent a) (equation_square_power b) value)*0.001 | value <- list_of_values l r ]]
+
+
