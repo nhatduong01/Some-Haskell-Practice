@@ -1,3 +1,4 @@
+
 f :: Int -> [Int] -> [Int]
 f n [arr] = replicate n arr
 f n (x:xs) = replicate n x ++ f n xs
@@ -80,5 +81,27 @@ list_of_values a b = [a + 0.001*i | i <- [1..(b-a)/0.001] ]
 solve :: Double -> Double -> [Double] -> [Double] -> [Double]
 solve l r a b =  [sum [(equation a b value)*0.001 | value <- list_of_values l r ],
                   pi *sum [(equation (equation_square_coefficent a) (equation_square_power b) value)*0.001 | value <- list_of_values l r ]]
+            
+{-
+You are given the cartesian coordinates of a set of points in a 2D  plane. 
+When traversed sequentially, these points form a Polygon, P, which is not self-intersecting in nature. 
+Can you compute the perimeter of polygon P
+-}
 
+{-
+Quick sort
+-}
+qsort :: Ord a => [a] ->[a]
+qsort [] = []
+qsort (x:xs) = qsort small ++ [x] ++ qsort bigger
+        where
+            small = [a | a <-xs, a <=x]
+            bigger = [b | b <- xs, b > x]
+
+
+act :: IO (Char,Char)
+act = do x <- getChar
+         getChar
+         y <- getChar
+         return (x,y)
 
