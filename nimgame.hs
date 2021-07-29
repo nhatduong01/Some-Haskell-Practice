@@ -23,9 +23,10 @@ player_one xs =  do putStrLn "Player one is playing"
                     putStrLn "Please how many start"
                     y <-getLine
                     let b = (read y :: Int)
-                    if check_win (update_board xs a b) == True then putStrLn "Player 1 won" else  do 
-                                                                                                        display_board 1 (update_board xs a b)
-                                                                                                        player_two  (update_board xs a b)
+                    let new_s = update_board xs a b
+                    if check_win (new_s) == True then putStrLn "Player 1 won" else  do 
+                                                                                        display_board 1 (new_s)
+                                                                                        player_two  (new_s)
 player_two :: [Int] -> IO ()
 player_two xs =  do putStrLn "Player two is playing"
                     putStrLn "Please enter a row"
@@ -34,9 +35,10 @@ player_two xs =  do putStrLn "Player two is playing"
                     putStrLn "Please how many start"
                     y <-getLine
                     let b = (read y :: Int)
-                    if check_win (update_board xs a b) == True then putStrLn "Player 2 won" else do 
-                                                                                                    display_board 1 (update_board xs a b)
-                                                                                                    player_one  (update_board xs a b)
+                    let new_s = update_board xs a b
+                    if check_win (new_s) == True then putStrLn "Player 2 won" else  do 
+                                                                                        display_board 1 (new_s)
+                                                                                        player_two  (new_s)
 main :: IO ()
 main = do
             initializing

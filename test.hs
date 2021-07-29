@@ -104,4 +104,45 @@ act = do x <- getChar
          getChar
          y <- getChar
          return (x,y)
+{-Check if a given a relation is a function
+
+getthedata ::Int -> [Int] -> [Int] -> IO [(Int,Int)]
+getthedata 0 a b = return (zip a b)
+getthedata times a b = do   first <- getLine
+                            let x = (read first :: Int)
+                            second <-getLine
+                            let y = (read second :: Int)
+                            let duong = [x] ++ a
+                            let nguyen = [y] ++ b
+                            let temp = getthedata (times -1) duong nguyen
+                            return temp-}
+makepair :: IO (Int,Int)
+makepair = do 
+    first <- getLine
+    let x = (read first :: Int)
+    second <- getLine
+    let y = (read second :: Int)
+    return (x,y)
+makeallpair :: Int ->IO [(Int,Int)]
+makeallpair n = if n == 0 then [()] else do
+    let y = makepair
+    return (y:makeallpair (n-1))
+
+{-checkisFunction :: IO ()gh
+checkisFunction = do times <-getLine
+                     let x = (read times :: Int)-}
+returnthesum :: Int -> Int -> IO Int
+returnthesum a b = do   first <- getLine
+                        let x = (read first :: Int) 
+                        second <- getLine
+                        let y = (read second :: Int)
+                        return (x + a + b + y)
+test_zip :: [Int] ->[Int] ->IO [(Int, Int)]
+test_zip a b = do   temp <- getLine
+                    let x = (read temp :: Int )
+                    let duong = [x] ++ a
+                    return (zip duong b)
+
+
+
 
